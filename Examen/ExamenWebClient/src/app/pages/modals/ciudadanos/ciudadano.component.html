@@ -1,0 +1,96 @@
+<div class='card'>
+  <div class='card-header'>
+    <div class='card-title'>
+      <div class='row'>
+        <h2 class='col-10'>{{titulo}}</h2>
+        <button (click)='CerrarEvent()' class='ml-auto btn btn-danger btn-icon btn-round mr-4'>
+          <i class=' tim-icons icon-simple-remove'></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class='card-body'>
+    <form #ciudadanoForm='ngForm' form>
+      <div class='row'>
+        <!-- Nombre -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='nombre' class='col-form-label'>
+              Nombre:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[0][0]===true, 
+              "has-danger" : ((focosArr[0][1] || valor) && nombre.errors) || (entrada.param.nombre !="" && nombre.errors), 
+              "has-success" : !nombre.errors }'>
+              <input type='text' class='form-control' required placeholder='Nombre' name='nombre' #nombre='ngModel'
+                [(ngModel)]='entrada.param.nombre' (focus)='focosArr[0][0] = true; focosArr[0][1] = true'
+                (blur)='focosArr[0][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(nombre.dirty || nombre.touched) && nombre.invalid'>
+              <div *ngIf='nombre.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- aPaterno -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='aPaterno' class='col-form-label'>
+              PrimerApellido:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[1][0]===true, 
+              "has-danger" : ((focosArr[1][1] || valor) && aPaterno.errors) || (entrada.param.aPaterno !="" && aPaterno.errors), 
+              "has-success" : !aPaterno.errors }'>
+              <input type='text' class='form-control' required placeholder='PrimerApellido' name='aPaterno'
+                #aPaterno='ngModel' [(ngModel)]='entrada.param.aPaterno'
+                (focus)='focosArr[1][0] = true; focosArr[1][1] = true' (blur)='focosArr[1][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(aPaterno.dirty || aPaterno.touched) && aPaterno.invalid'>
+              <div *ngIf='aPaterno.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- aMaterno -->
+        <div class='col-6'>
+          <label class='col-form-label'>Segundo apellido:</label>
+          <div class='mt-auto mb-auto'>
+            <div class=' form-group'>
+              <input class=' form-control' placeholder='Segundo apellido' type='text' name='aMaterno'
+                #aMaterno='ngModel' [(ngModel)]='entrada.param.aMaterno' />
+            </div>
+          </div>
+        </div>
+        <!-- Edad -->
+        <div class='col-3'>
+          <div class='form-group'>
+            <label for='edad' class='col-form-label'>
+              Edad:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[2][0]===true, 
+              "has-danger" : ((focosArr[2][1] || valor) && edad.errors) || (entrada.param.edad !="" && edad.errors), 
+              "has-success" : !edad.errors }'>
+              <input type='number' min="1" class='form-control' required placeholder='Edad' name='edad' #edad='ngModel'
+                [(ngModel)]='entrada.param.edad' (focus)='focosArr[2][0] = true; focosArr[2][1] = true'
+                (blur)='focosArr[2][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(edad.dirty || edad.touched) && edad.invalid'>
+              <div *ngIf='edad.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='card-footer'>
+    <button class=" btn btn-default btn-success ml-auto mr-auto" tooltip="Guardar" (click)="GuarcaCiudadanoEvent()">
+      Guardar <i class=" tim-icons icon-check-2"></i>
+    </button>
+  </div>
+</div>

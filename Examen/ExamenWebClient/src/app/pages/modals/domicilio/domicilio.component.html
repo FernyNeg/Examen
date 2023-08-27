@@ -1,0 +1,107 @@
+<div class='card'>
+  <div class='card-header'>
+    <div class='card-title'>
+      <div class='row'>
+        <h2 class='col-10'>{{titulo}}</h2>
+        <button (click)='CerrarEvent()' class='ml-auto btn btn-danger btn-icon btn-round mr-4'>
+          <i class=' tim-icons icon-simple-remove'></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class='card-body'>
+    <form #ciudadanoForm='ngForm' form>
+      <div class='row'>
+        <!-- ciudad -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='ciudad' class='col-form-label'>
+              Ciudad:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[0][0]===true, 
+              "has-danger" : ((focosArr[0][1] || valor) && ciudad.errors) || (entrada.param.ciudad !="" && ciudad.errors), 
+              "has-success" : !ciudad.errors }'>
+              <input type='text' class='form-control' required placeholder='Ciudad' name='ciudad' #ciudad='ngModel'
+                [(ngModel)]='entrada.param.ciudad' (focus)='focosArr[0][0] = true; focosArr[0][1] = true'
+                (blur)='focosArr[0][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(ciudad.dirty || ciudad.touched) && ciudad.invalid'>
+              <div *ngIf='ciudad.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- pais -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='pais' class='col-form-label'>
+              Pais:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[1][0]===true, 
+              "has-danger" : ((focosArr[1][1] || valor) && pais.errors) || (entrada.param.pais !="" && pais.errors), 
+              "has-success" : !pais.errors }'>
+              <input type='text' class='form-control' required placeholder='Pais' name='pais'
+                #pais='ngModel' [(ngModel)]='entrada.param.pais'
+                (focus)='focosArr[1][0] = true; focosArr[1][1] = true' (blur)='focosArr[1][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(pais.dirty || pais.touched) && pais.invalid'>
+              <div *ngIf='pais.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- codPostal -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='codPostal' class='col-form-label'>
+              Codigo Postal:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[2][0]===true, 
+              "has-danger" : ((focosArr[2][1] || valor) && codPostal.errors) || (entrada.param.codPostal !="" && codPostal.errors), 
+              "has-success" : !codPostal.errors }'>
+              <input type='text' class='form-control' required placeholder='Codigo Postal' name='codPostal'
+                #codPostal='ngModel' [(ngModel)]='entrada.param.codPostal'
+                (focus)='focosArr[2][0] = true; focosArr[2][1] = true' (blur)='focosArr[2][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(codPostal.dirty || codPostal.touched) && codPostal.invalid'>
+              <div *ngIf='codPostal.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- direccion -->
+        <div class='col-6'>
+          <div class='form-group'>
+            <label for='direccion' class='col-form-label'>
+              Calle:
+            </label>
+            <div class="form-group" [ngClass]='{
+              "input-group-focus" : focosArr[3][0]===true, 
+              "has-danger" : ((focosArr[3][1] || valor) && direccion.errors) || (entrada.param.direccion !="" && direccion.errors), 
+              "has-success" : !direccion.errors }'>
+              <input type='text' class='form-control' required placeholder='Calle' name='direccion'
+                #direccion='ngModel' [(ngModel)]='entrada.param.direccion'
+                (focus)='focosArr[3][0] = true; focosArr[3][1] = true' (blur)='focosArr[3][0] = false'>
+            </div>
+            <div class='text-danger' *ngIf='(direccion.dirty || direccion.touched) && direccion.invalid'>
+              <div *ngIf='direccion.errors.required'>
+                Este campo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='card-footer'>
+    <button class=" btn btn-default btn-success ml-auto mr-auto" tooltip="Guardar" (click)="GuarcaDomicilioEvent()">
+      Guardar <i class=" tim-icons icon-check-2"></i>
+    </button>
+  </div>
+</div>
