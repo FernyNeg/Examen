@@ -10,8 +10,7 @@
 	</parent>
 	<artifactId>ExamenWebClient</artifactId>
 	<packaging>jar</packaging>
-	<name>ExamenWebClient</name>
-	<name>Examen Web Client</name>
+	<name>ExamenAng</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.tuckey</groupId>

@@ -16,7 +16,7 @@
 			ExamenPersist
 		</module>
 		<module>
-			ExamenWebClient
+			ExamenAng
 		</module>
 		<module>
 			ExamenRest
