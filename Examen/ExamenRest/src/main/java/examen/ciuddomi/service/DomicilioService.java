@@ -19,7 +19,7 @@ public class DomicilioService {
 	private DomicilioDao dao;
 
 	public Domicilio agregarDomicilio(Domicilio dom) {
-		log.info("Se procesa inserción de domicilio");
+		log.info("Se proces inserción de domicilio");
 		return dao.agregarDomicilio(dom);
 	}
 

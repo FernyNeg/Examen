@@ -1,0 +1,53 @@
+<div class="content">
+  <div class="row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row">
+            <h4 class=" card-title ml-3 mt-2 ">Lista de Domicilios</h4>
+            <button class=" btn btn-success ml-auto mr-5" tooltip="Agregar" (click)="AgregarDomicilioEvent()">
+              Agregar <i class=" tim-icons icon-simple-add"></i>
+            </button>
+          </div>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive no-bars">
+            <table class=" table tablesorter">
+              <thead class=" text-primary">
+                <tr>
+                  <th>Id</th>
+                  <th>Ciudad</th>
+                  <th>Pais</th>
+                  <th class=" text-center">Editar</th>
+                  <th class=" text-center">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of domicilios">
+                  <td>{{d.id}}</td>
+                  <td>{{d.ciudad}}</td>
+                  <td>{{d.pais}}</td>
+                  <td class=" text-center">
+                    <button class=" btn btn-default btn-link btn-sm btn-icon " tooltip="Editar"
+                      (click)="UpdateDomicilioEvent(d)">
+                      <i class=" text-success tim-icons icon-pencil"></i>
+                    </button>
+                  </td>
+                  <td class=" text-center">
+                    <button class=" btn btn-default btn-link btn-sm btn-icon " tooltip="Editar"
+                      (click)="DeleteDomicilioEvent(d)">
+                      <i class=" text-danger tim-icons icon-trash-simple"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="domicilios.length==0">
+                  <td colspan="5" class='text-center'>No hay datos a mostrar</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
