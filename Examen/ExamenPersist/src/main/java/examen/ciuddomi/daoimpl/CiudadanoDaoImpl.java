@@ -34,7 +34,7 @@ public class CiudadanoDaoImpl implements CiudadanoDao {
 	@Override
 	public void borrarCiudadano(Ciudadano dom) {
 		log.info("Se inicia eliminación de ciudadano");
-		repo.deleteById(dom.getIdCiudadano());
+		repo.deleteById(dom.getId());
 	}
 
 	@Override
