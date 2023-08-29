@@ -6,7 +6,6 @@ import { UrlConstantes } from '../shared/UrlConstantes';
 @Injectable({
   providedIn: 'root'
 })
-
 export class DomiciolioService {
   constructor(private conexion: HttpClient) { }
   AgregarDomicilio(param: Domicilio) { return this.conexion.post<Domicilio>(UrlConstantes.agregarDomicilio, param); }

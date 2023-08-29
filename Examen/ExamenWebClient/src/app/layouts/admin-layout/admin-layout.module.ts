@@ -16,8 +16,9 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CiudadanosComponent } from "src/app/pages/ciudadanos/ciudadanos.component";
-import { CiudadanoComponent } from "src/app/pages/modals/ciudadanos/ciudadano.component";
-import { DomicilioComponent } from "src/app/pages/modals/domicilio/domicilio.component";
+import { DomiciliosComponent } from "src/app/pages/domicilios/domicilios.component";
+import { CiudadanoComponent } from "src/app/components/modals/ciudadanos/ciudadano.component";
+import { DomicilioComponent } from "src/app/components/modals/domicilio/domicilio.component";
 
 @NgModule({
   imports: [
@@ -37,7 +38,9 @@ import { DomicilioComponent } from "src/app/pages/modals/domicilio/domicilio.com
     MapComponent,
     CiudadanosComponent,
     CiudadanoComponent,
-    DomicilioComponent
+    DomiciliosComponent,
+    DomicilioComponent,
+
     // RtlComponent
   ]
 })

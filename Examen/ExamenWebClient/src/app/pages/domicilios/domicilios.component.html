@@ -17,23 +17,23 @@
                 <tr>
                   <th>Id</th>
                   <th>Ciudad</th>
-                  <th>Pais</th>
+                  <th>Direcc&oacute;n</th>
                   <th class=" text-center">Editar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let c of respuesta">
-                  <td>{{c.id}}</td>
-                  <td>{{c.ciudad}}</td>
-                  <td>{{c.pais}}</td>
+                <tr *ngFor="let d of Domicilios">
+                  <td>{{d.id}}</td>
+                  <td>{{d.ciudad}}</td>
+                  <td>{{d.direccion}}</td>
                   <td class=" text-center">
                     <button class=" btn btn-default btn-link btn-sm btn-icon " tooltip="Editar"
-                      (click)="UpdateDomicilioEvent(c)">
+                      (click)="UpdateDomicilioEvent(d)">
                       <i class=" text-warning tim-icons icon-pencil"></i>
                     </button>
                   </td>
                 </tr>
-                <tr>
+                <tr *ngIf="Domicilios.length==0">
                   <td colspan="4" class='text-center'>No hay datos a mostrar</td>
                 </tr>
               </tbody>

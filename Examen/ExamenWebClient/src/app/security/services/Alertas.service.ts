@@ -56,12 +56,12 @@ export class AlertasService {
     });
   }
 
-  async confirmacionAlert(titulo: string, msg: string, callback) {
+  async confirmacionAlert(titulo: string, msg: string, confirmText:string,cancelText:string, callback) {
     const res = await this.confirmacion.fire({
       title: titulo ? titulo : '¿Esta seguro de realizar esta accion?',
       text: msg ? msg : "¡No puede deshacer esta acción!",
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: confirmText?confirmText:'Eliminar',
+      cancelButtonText:  cancelText?cancelText:'Cancelar',
     }).then(env => {
       callback(env);
     });

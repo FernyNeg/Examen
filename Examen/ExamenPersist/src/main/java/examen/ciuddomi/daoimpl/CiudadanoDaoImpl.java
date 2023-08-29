@@ -21,13 +21,13 @@ public class CiudadanoDaoImpl implements CiudadanoDao {
 
 	@Override
 	public Ciudadano agregarCiudadano(Ciudadano dom) {
-		log.info("Se inicia eliminación de ciudadano");
+		log.info("Se inicia inserción de ciudadano");
 		return repo.save(dom);
 	}
 
 	@Override
 	public Ciudadano editarCiudadano(Ciudadano dom) {
-		log.info("Se inicia eliminación de ciudadano");
+		log.info("Se inicia edición de ciudadano");
 		return repo.save(dom);
 	}
 
@@ -39,13 +39,13 @@ public class CiudadanoDaoImpl implements CiudadanoDao {
 
 	@Override
 	public List<Ciudadano> leerCiudadanos() {
-		log.info("Se inicia eliminación de ciudadano");
+		log.info("Se inicia consulta de ciudadanos");
 		return repo.findAll();
 	}
 
 	@Override
 	public Optional<Ciudadano> leerCiudadanoPorId(Long id) {
-		log.info("Se inicia eliminación de ciudadano");
+		log.info("Se inicia consulta de ciudadano por id");
 		return repo.findById(id);
 	}
 

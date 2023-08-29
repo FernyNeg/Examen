@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CiudadanosService } from 'src/app/security/services/Ciudadano.service';
-import { Ciudadano } from 'src/app/security/shared/models/Ciudadano.model';
-import { CiudadanoComponent } from '../modals/ciudadanos/ciudadano.component';
 import { ModalType } from 'src/app/security/shared/models/Base/ModalType.model';
+import { Ciudadano } from 'src/app/security/shared/models/Ciudadano.model';
 import { AccionesModal } from 'src/app/security/shared/models/enums/AccionesModal.enum';
+import { CiudadanoComponent } from '../../components/modals/ciudadanos/ciudadano.component';
 
 @Component({
   selector: 'app-ciudadanos',
@@ -12,23 +12,20 @@ import { AccionesModal } from 'src/app/security/shared/models/enums/AccionesModa
   styleUrls: ['./ciudadanos.component.scss']
 })
 export class CiudadanosComponent implements OnInit {
-  //#region Inicios
 
-  lista: Ciudadano[] = [];
-
+  //#region Inicio
+  ciudadanos: Ciudadano[] = [];
   constructor(
     private service: CiudadanosService,
     private dialog: MatDialog,
   ) { }
-
   ngOnInit() {
-    this.ConsultaService();
+    this.ConsultaIniService();
   }
   //#endregion
 
   //#region Eventos
   UpdateCiudadanoEvent(c: Ciudadano) {
-    console.log(c);
     this.openDialog(c, AccionesModal.editar);
   }
   AgregarCiudadanoEvent() {
@@ -37,7 +34,7 @@ export class CiudadanosComponent implements OnInit {
   //#endregion
 
   //#region Metodos
-  openDialog(c: Ciudadano, accion: AccionesModal) {
+  private openDialog(c: Ciudadano, accion: AccionesModal) {
     var env: ModalType<Ciudadano> = new ModalType<Ciudadano>();
     env.param = c;
     env.accion = accion;
@@ -48,14 +45,15 @@ export class CiudadanosComponent implements OnInit {
       disableClose: true,
       data: env
     });
-    dialogRef.afterClosed().subscribe(res => { this.ConsultaService(); });
+    dialogRef.afterClosed().subscribe(() => { this.ConsultaIniService(); });
   }
   //#endregion
 
   //#region Servicios
-  ConsultaService() {
+  private ConsultaIniService() {
     this.service.LeerCiudadanosList().subscribe(res => {
-      this.lista = res;
+      this.ciudadanos = res;
+      console.log(this.ciudadanos, " ciudadanos");
     });
   }
   //#endregion
