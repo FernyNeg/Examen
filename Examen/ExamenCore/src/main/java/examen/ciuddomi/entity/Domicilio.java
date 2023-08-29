@@ -5,18 +5,26 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "domicilio")
 public class Domicilio {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDomicilio")
 	private Long id;
+
 	@Column(name = "ciudad")
 	private String ciudad;
+
 	@Column(name = "pais")
 	private String pais;
+
 	@Column(name = "codPostal")
 	private int codPostal;
+
 	@Column(name = "direccion")
 	private String direccion;
+
+	public Domicilio() {
+	}
 
 	public Domicilio(Long idDomicilio, String c, String p, int cp, String d) {
 		this.id = idDomicilio;
@@ -32,9 +40,6 @@ public class Domicilio {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Domicilio() {
 	}
 
 	public String getCiudad() {
