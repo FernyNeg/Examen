@@ -1,5 +1,7 @@
 package examen.ciuddomi.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -23,6 +25,12 @@ public class Ciudadano {
 	@Column(name = "edad")
 	private int edad;
 
+	@OneToMany(targetEntity = Domicilio.class)
+	private List<Domicilio> domiciliosList;
+
+	public Ciudadano() {
+	}
+
 	public Ciudadano(Long idCiudadano, String nom, String pater, String mater, int edad) {
 		this.id = idCiudadano;
 		this.nombre = nom;
@@ -31,15 +39,12 @@ public class Ciudadano {
 		this.edad = edad;
 	}
 
-	public Ciudadano() {
-	}
-
-	public Long getIdCiudadano() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setIdCiudadano(Long idCiudadano) {
-		this.id = idCiudadano;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
@@ -72,6 +77,14 @@ public class Ciudadano {
 
 	public void setEdad(int edad) {
 		this.edad = edad;
+	}
+
+	public List<Domicilio> getDomiciliosList() {
+		return domiciliosList;
+	}
+
+	public void setDomiciliosList(List<Domicilio> domiciliosList) {
+		this.domiciliosList = domiciliosList;
 	}
 
 }
