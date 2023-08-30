@@ -4,7 +4,7 @@
       <div class=" card">
         <div class=" card-header">
           <div class="row">
-            <h4 class=" card-title ml-3 mt-2 ">Lista de ciudadanos</h4>
+            <h2 class=" card-title ml-3 mt-2 ">Lista de ciudadanos</h2>
             <button class=" btn btn-success ml-auto mr-5" tooltip="Agregar" (click)="AgregarCiudadanoEvent()">
               Agregar <i class=" tim-icons icon-simple-add"></i>
             </button>
@@ -24,13 +24,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let c of ciudadanos">
-                  <td>{{c.idCiudadano}}</td>
+                  <td>{{c.id}}</td>
                   <td>{{c.nombre}}</td>
                   <td>{{c.edad}}</td>
                   <td class=" text-center">
                     <button class=" btn btn-default btn-link btn-sm btn-icon " tooltip="Editar"
                       (click)="UpdateCiudadanoEvent(c)">
-                      <i class=" text-success tim-icons icon-pencil"></i>
+                      <i class=" text-success tim-icons icon-zoom-split"></i>
                     </button>
                   </td>
                   <td class=" text-center">

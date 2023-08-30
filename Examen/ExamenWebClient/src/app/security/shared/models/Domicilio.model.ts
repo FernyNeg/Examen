@@ -4,4 +4,5 @@ export class Domicilio {
   pais: string;
   codPostal: string;
   direccion: string;
+  checked: boolean = false;
 }

@@ -16,7 +16,7 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CiudadanosComponent } from "src/app/pages/ciudadanos/ciudadanos.component";
-import { CiudadanoComponent } from "src/app/pages/modals/ciudadanos/ciudadano.component";
+import { CiudadanoComponent } from "src/app/pages/modals/ciudadano/ciudadano.component";
 import { DomicilioComponent } from "src/app/pages/modals/domicilio/domicilio.component";
 import { DomiciliosComponent } from "src/app/pages/domicilios/domicilios.component";
 

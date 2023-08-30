@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CiudadanosService } from 'src/app/security/services/Ciudadano.service';
 import { Ciudadano } from 'src/app/security/shared/models/Ciudadano.model';
-import { CiudadanoComponent } from '../modals/ciudadanos/ciudadano.component';
+import { CiudadanoComponent } from '../modals/ciudadano/ciudadano.component';
 import { ModalType } from 'src/app/security/shared/models/Base/ModalType.model';
 import { AccionesModal } from 'src/app/security/shared/models/enums/AccionesModal.enum';
 import { AlertasService } from 'src/app/security/services/Alertas.service';
@@ -30,7 +30,6 @@ export class CiudadanosComponent implements OnInit {
 
   //#region Eventos
   UpdateCiudadanoEvent(c: Ciudadano) {
-    console.log(c);
     this.openDialog(c, AccionesModal.editar);
   }
   AgregarCiudadanoEvent() {

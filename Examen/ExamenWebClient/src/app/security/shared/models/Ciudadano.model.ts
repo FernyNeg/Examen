@@ -1,7 +1,10 @@
+import { Domicilio } from "./Domicilio.model";
+
 export class Ciudadano {
-  idCiudadano: number;
+  id: number;
   nombre: string;
   aPaterno: string;
   aMaterno: string;
   edad: string;
+  domiciliosList: Domicilio[] = [];
 }

@@ -86,6 +86,30 @@
           </div>
         </div>
       </div>
+      <div class='no-bars table-responsive'>
+        <table class=' table'>
+          <thead class=' text-primary'>
+            <tr>
+              <th class=' text-center'>Direccion</th>
+              <th class=' text-center'>Codigo Postal</th>
+              <th class=' text-center'>Seleccionar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let d of domicilios'>
+              <td class=' text-center'>{{d.direccion}}</td>
+              <td class=' text-center'>{{d.codPostal}}</td>
+              <td class=' text-center'>
+                <input type="checkbox" name="{{d.direccion}}" id="{{d.id}}" #checked='ngModel'
+                  [(ngModel)]='d.checked'>
+              </td>
+            </tr>
+            <tr *ngIf='domicilios.length==0'>
+              <td colspan='3' class='text-center'>No hay datos a mostrar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </form>
   </div>
   <div class='card-footer'>

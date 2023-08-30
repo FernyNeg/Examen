@@ -30,7 +30,6 @@ export class DomiciliosComponent implements OnInit {
 
   //#region Eventos
   UpdateDomicilioEvent(d: Domicilio) {
-    console.log(d);
     this.openDialog(d, AccionesModal.editar);
   }
   AgregarDomicilioEvent() {
@@ -68,7 +67,6 @@ export class DomiciliosComponent implements OnInit {
   ConsultaService() {
     this.service.LeerDomiciolioList().subscribe(res => {
       this.domicilios = res;
-      console.log(this.domicilios);
     });
   }
   DeleteDomicilioService(d) {

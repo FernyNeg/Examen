@@ -43,6 +43,10 @@ export class DomicilioComponent implements OnInit {
       [false, false],
     ];
   }
+  guardadoCorrecto() {
+    this.alertas.success("Se ha guardado", "El domicilio se ha guardado correctamente");
+    this.CerrarEvent();
+  }
   //#endregion
 
   //#region Eventos
@@ -58,7 +62,6 @@ export class DomicilioComponent implements OnInit {
   async EditaService() {
     let resp;
     await this.alertas.confirmacionAlert("Confirmación", "Se modificara el domicilio actual", "Modificar", "Cancelar", async function (r) { resp = r });
-    console.log(await resp.value);
     if (await resp.value) {
       this.service.EditarDomicilio(this.entrada.param).subscribe(response => {
         this.alertas.success("Se ha guardado el cambio");
@@ -69,7 +72,7 @@ export class DomicilioComponent implements OnInit {
   CreaService() {
     this.service.AgregarDomicilio(this.entrada.param).subscribe(res => {
       res.id != 0 ?
-        this.alertas.success("Se ha guardado", "El domicilio se ha guardado correctamente") :
+        this.guardadoCorrecto() :
         this.alertas.error("Algo salio mal", "Ha ocurrido un error en la accion de guardar");
     });
   }
