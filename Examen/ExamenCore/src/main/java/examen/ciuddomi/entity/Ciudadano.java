@@ -25,7 +25,7 @@ public class Ciudadano {
 	@Column(name = "edad")
 	private int edad;
 
-	@OneToMany(targetEntity = Domicilio.class)
+	@ManyToMany(targetEntity = Domicilio.class)
 	private List<Domicilio> domiciliosList;
 
 	public Ciudadano() {

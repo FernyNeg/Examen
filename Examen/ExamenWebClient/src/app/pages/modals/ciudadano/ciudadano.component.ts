@@ -33,13 +33,14 @@ export class CiudadanoComponent implements OnInit {
   ngOnInit() {
     this.validaAccion();
     this.inicioFocos();
-    this.ConsultaInicialService();
   }
   private validaAccion() {
     if (this.entrada.accion === AccionesModal.editar) {
       this.titulo = "Edición de datos de ciudadano";
+      this.ConsultaInicialService();
     } else {
       this.titulo = "Inserción de un nuevo ciudadano";
+      this.consultaDomiciliosService();
     }
   }
   private inicioFocos() {
@@ -106,6 +107,9 @@ export class CiudadanoComponent implements OnInit {
         this.guardadoCorrecto() :
         this.alertas.error("Algo salio mal", "Ha ocurrido un error en la accion de guardar");
     });
+  }
+  consultaDomiciliosService() {
+    this.serviceDom.LeerDomiciolioList().subscribe(res => { this.domicilios = res; });
   }
   //#endregion
 
