@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { forkJoin } from 'rxjs';
+
 import { AlertasService } from 'src/app/security/services/Alertas.service';
 import { CiudadanosService } from 'src/app/security/services/Ciudadano.service';
 import { DomiciolioService } from 'src/app/security/services/Domicilio.service';
@@ -31,8 +33,7 @@ export class CiudadanoComponent implements OnInit {
   ngOnInit() {
     this.validaAccion();
     this.inicioFocos();
-    this.ConsultaPorIdService();
-
+    this.ConsultaInicialService();
   }
   private validaAccion() {
     if (this.entrada.accion === AccionesModal.editar) {
@@ -51,6 +52,11 @@ export class CiudadanoComponent implements OnInit {
   //#endregion
 
   //#region Metodos
+  CombinaSeleccionados() {
+    this.domicilios.forEach(d => {
+      if (this.entrada.param.domiciliosList.find(domi => { return domi.id === d.id })) d.checked = true;
+    });
+  }
   async confirmaModicifacion() {
     let resp;
     await this.alertas.confirmacionAlert("Confirmación", "Se modificara el ciudadano actual", "Modificar", "Cancelar", async function (r) { resp = r });
@@ -78,16 +84,20 @@ export class CiudadanoComponent implements OnInit {
   //#endregion
 
   //#region Services
+  ConsultaInicialService() {
+    forkJoin([
+      this.service.LeerCiudadanoPorId(this.entrada.param.id),
+      this.serviceDom.LeerDomiciolioList()]
+    ).subscribe(res => {
+      this.entrada.param = res[0];
+      this.domicilios = res[1];
+      this.CombinaSeleccionados();
+    })
+  }
   EditaService() {
     this.service.EditarCiudadano(this.entrada.param).subscribe(response => {
       this.alertas.success("Se ha guardado el cambio");
       this.CerrarEvent();
-    });
-  }
-  ConsultaPorIdService() {
-    this.service.LeerCiudadanoPorId(this.entrada.param.id).subscribe(res => {
-      this.entrada.param = res;
-      this.GetDomicilioService();
     });
   }
   CreaService() {
@@ -95,16 +105,6 @@ export class CiudadanoComponent implements OnInit {
       res.id != 0 ?
         this.guardadoCorrecto() :
         this.alertas.error("Algo salio mal", "Ha ocurrido un error en la accion de guardar");
-    });
-  }
-  GetDomicilioService() {
-    this.serviceDom.LeerDomiciolioList().subscribe(res => {
-      this.domicilios = res;
-      this.domicilios.forEach(d => {
-        this.entrada.param.domiciliosList.forEach(selected => {
-          if (selected.id === d.id) { d.checked = true }
-        });
-      });
     });
   }
   //#endregion
