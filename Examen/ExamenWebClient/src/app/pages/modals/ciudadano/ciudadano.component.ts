@@ -5,6 +5,7 @@ import { forkJoin } from 'rxjs';
 import { AlertasService } from 'src/app/security/services/Alertas.service';
 import { CiudadanosService } from 'src/app/security/services/Ciudadano.service';
 import { DomiciolioService } from 'src/app/security/services/Domicilio.service';
+import { ConsultaList } from 'src/app/security/shared/models/Base/ConsultaList.model';
 import { ModalType } from 'src/app/security/shared/models/Base/ModalType.model';
 import { Ciudadano } from 'src/app/security/shared/models/Ciudadano.model';
 import { Domicilio } from 'src/app/security/shared/models/Domicilio.model';
@@ -55,7 +56,7 @@ export class CiudadanoComponent implements OnInit {
   //#region Metodos
   CombinaSeleccionados() {
     this.domicilios.forEach(d => {
-      if (this.entrada.param.domiciliosList.find(domi => { return domi.id === d.id })) d.checked = true;
+      if (this.entrada.param.domicilios.find(domi => { return domi.id === d.id })) d.activo = true;
     });
   }
   async confirmaModicifacion() {
@@ -66,7 +67,7 @@ export class CiudadanoComponent implements OnInit {
     }
   }
   validaSeleccionadas() {
-    this.entrada.param.domiciliosList = this.domicilios.filter(d => { if (d.checked === true) return d });
+    this.entrada.param.domicilios = this.domicilios.filter(d => { if (d.activo === true) return d });
     this.entrada.accion === AccionesModal.crear ? this.CreaService() : this.confirmaModicifacion();
   }
   guardadoCorrecto() {
@@ -88,12 +89,12 @@ export class CiudadanoComponent implements OnInit {
   ConsultaInicialService() {
     forkJoin([
       this.service.LeerCiudadanoPorId(this.entrada.param.id),
-      this.serviceDom.LeerDomiciolioList()]
-    ).subscribe(res => {
-      this.entrada.param = res[0];
-      this.domicilios = res[1];
-      this.CombinaSeleccionados();
-    })
+      this.serviceDom.LeerDomiciolioList(new ConsultaList<Domicilio>())])
+      .subscribe(res => {
+        this.entrada.param = res[0];
+        this.domicilios = res[1];
+        this.CombinaSeleccionados();
+      });
   }
   EditaService() {
     this.service.EditarCiudadano(this.entrada.param).subscribe(response => {
@@ -109,7 +110,7 @@ export class CiudadanoComponent implements OnInit {
     });
   }
   consultaDomiciliosService() {
-    this.serviceDom.LeerDomiciolioList().subscribe(res => { this.domicilios = res; });
+    this.serviceDom.LeerDomiciolioList(new ConsultaList<Domicilio>()).subscribe(res => { this.domicilios = res; this.CombinaSeleccionados(); });
   }
   //#endregion
 

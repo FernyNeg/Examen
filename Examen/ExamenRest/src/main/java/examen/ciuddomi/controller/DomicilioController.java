@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import examen.ciuddomi.constantes.UrlConstantes;
-import examen.ciuddomi.entity.Domicilio;
+import examen.ciuddomi.entity.domicilio.Domicilio;
+import examen.ciuddomi.entity.domicilio.dto.IidCiudadDireccionDTO;
+import examen.ciuddomi.entity.models.ConsultaList;
 import examen.ciuddomi.service.DomicilioService;
 
 @RestController
@@ -47,9 +49,9 @@ public class DomicilioController {
 
 	@PostMapping(value = UrlConstantes.leerDomicilios)
 	@ResponseBody
-	public List<Domicilio> leerDomicilios() {
+	public List<IidCiudadDireccionDTO> leerDomicilios(@RequestBody ConsultaList<Domicilio> busqueda) {
 		log.info("Se recibe consulta de domicilios");
-		return service.leerDomicilios();
+		return service.leerDomiciliosPorDireccion(busqueda);
 	}
 
 	@PostMapping(value = UrlConstantes.leerDomicilioPorId)

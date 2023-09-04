@@ -4,15 +4,30 @@
       <div class=" card">
         <div class=" card-header">
           <div class="row">
-            <h2 class=" card-title ml-3 mt-2 ">Lista de ciudadanos</h2>
+            <h2 class=" card-title ml-3 mt-2 " id="listaCiudadanos">Lista de ciudadanos</h2>
             <button class=" btn btn-success ml-auto mr-5" tooltip="Agregar" (click)="AgregarCiudadanoEvent()">
               Agregar <i class=" tim-icons icon-simple-add"></i>
+            </button>
+          </div>
+          <div class="row">
+            <div class='col-9'>
+              <label class='col-form-label'>Buscar por nombre:</label>
+              <div class='mt-auto mb-auto'>
+                <div class=' form-group'>
+                  <input class=' form-control' placeholder='Nombre' type='text'
+                    [(ngModel)]='busqueda.param' />
+                </div>
+              </div>
+            </div>
+            <button class=" btn btn-info btn-icon btn-round ml-auto mr-5 mt-auto mb-auto" tooltip="Agregar"
+              (click)="BuscarPorNombreEvent()">
+              <i class=" tim-icons icon-zoom-split"></i>
             </button>
           </div>
         </div>
         <div class=" card-body">
           <div class=" table-responsive no-bars">
-            <table class=" table tablesorter" id="">
+            <table class=" table tablesorter" aria-describedby="listaCiudadanos">
               <thead class=" text-primary">
                 <tr>
                   <th>Id</th>
@@ -23,7 +38,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let c of ciudadanos">
+                <tr *ngFor="let c of this.busqueda.list">
                   <td>{{c.id}}</td>
                   <td>{{c.nombre}}</td>
                   <td>{{c.edad}}</td>
@@ -40,7 +55,7 @@
                     </button>
                   </td>
                 </tr>
-                <tr *ngIf='ciudadanos.length==0'>
+                <tr *ngIf='this.busqueda.list.length==0'>
                   <td colspan="5" class='text-center'>No hay datos a mostrar</td>
                 </tr>
               </tbody>

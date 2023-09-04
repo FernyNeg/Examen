@@ -1,8 +1,11 @@
+import { Ciudadano } from "./Ciudadano.model";
+
 export class Domicilio {
   id: number;
   ciudad: string;
   pais: string;
   codPostal: string;
   direccion: string;
-  checked: boolean = false;
+  activo: boolean = false;
+  ciudadanos: Ciudadano[] = [];
 }

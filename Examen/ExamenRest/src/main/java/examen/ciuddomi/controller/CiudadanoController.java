@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import examen.ciuddomi.constantes.UrlConstantes;
-import examen.ciuddomi.entity.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.dto.IidNombreEdadDTO;
+import examen.ciuddomi.entity.models.ConsultaList;
 import examen.ciuddomi.service.CiudadanoService;
 
 @RestController
@@ -46,9 +48,9 @@ public class CiudadanoController {
 
 	@PostMapping(value = UrlConstantes.leerCiudadanos)
 	@ResponseBody
-	public List<Ciudadano> leerCiudadanos() {
+	public List<IidNombreEdadDTO> leerCiudadanosPorNombre(@RequestBody ConsultaList<Ciudadano> busqueda) {
 		log.info("Se recibe consulta de ciudadanos");
-		return service.leerCiudadanos();
+		return service.leerCiudadanosPorNombre(busqueda);
 	}
 
 	@PostMapping(value = UrlConstantes.leerCiudadanoPorId)

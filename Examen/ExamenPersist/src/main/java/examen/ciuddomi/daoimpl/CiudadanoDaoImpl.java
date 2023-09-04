@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import examen.ciuddomi.dao.CiudadanoDao;
-import examen.ciuddomi.entity.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.dto.IidNombreEdadDTO;
 import examen.ciuddomi.repository.CiudadanoRepository;
 
 @Service
@@ -38,9 +39,9 @@ public class CiudadanoDaoImpl implements CiudadanoDao {
 	}
 
 	@Override
-	public List<Ciudadano> leerCiudadanos() {
+	public List<IidNombreEdadDTO> leerCiudadanosPorNombre(String nombre) {
 		log.info("Se inicia consulta de ciudadanos");
-		return repo.findAll();
+		return repo.findByNombreContaining(nombre);
 	}
 
 	@Override

@@ -1,5 +1,10 @@
-package examen.ciuddomi.entity;
+package examen.ciuddomi.entity.domicilio;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import examen.ciuddomi.entity.ciudadano.Ciudadano;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,21 +12,25 @@ import jakarta.persistence.*;
 public class Domicilio {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "idDomicilio")
 	private Long id;
 
-	@Column(name = "ciudad")
+	@Column(name = "ciudad", nullable = false)
 	private String ciudad;
 
-	@Column(name = "pais")
+	@Column(name = "pais", nullable = false)
 	private String pais;
 
-	@Column(name = "codPostal")
+	@Column(name = "codPostal", nullable = false)
 	private int codPostal;
 
-	@Column(name = "direccion")
+	@Column(name = "direccion", nullable = false)
 	private String direccion;
+	
+	@ManyToMany(mappedBy = "domicilios",fetch = FetchType.LAZY)
+  @JsonBackReference
+	private Set<Ciudadano> ciudadanos;
 
 	public Domicilio() {
 	}

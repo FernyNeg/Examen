@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import examen.ciuddomi.dao.CiudadanoDao;
-import examen.ciuddomi.entity.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.Ciudadano;
+import examen.ciuddomi.entity.ciudadano.dto.IidNombreEdadDTO;
+import examen.ciuddomi.entity.models.ConsultaList;
 
 @Service
 public class CiudadanoService {
@@ -33,9 +35,9 @@ public class CiudadanoService {
 		dao.borrarCiudadano(dom);
 	}
 
-	public List<Ciudadano> leerCiudadanos() {
+	public List<IidNombreEdadDTO> leerCiudadanosPorNombre(ConsultaList<Ciudadano> busqueda) {
 		log.info("Se procesa consulta de ciudadanos");
-		return dao.leerCiudadanos();
+		return dao.leerCiudadanosPorNombre(busqueda.getParam() == null ? "" : busqueda.getParam());
 	}
 
 	public Optional<Ciudadano> leerCiudadanoPorId(Long id) {

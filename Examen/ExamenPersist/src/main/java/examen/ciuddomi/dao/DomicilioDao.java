@@ -3,7 +3,8 @@ package examen.ciuddomi.dao;
 import java.util.List;
 import java.util.Optional;
 
-import examen.ciuddomi.entity.Domicilio;
+import examen.ciuddomi.entity.domicilio.Domicilio;
+import examen.ciuddomi.entity.domicilio.dto.IidCiudadDireccionDTO;
 
 public interface DomicilioDao {
 
@@ -13,7 +14,7 @@ public interface DomicilioDao {
 
 	void borrarDomicilio(Domicilio dom);
 
-	List<Domicilio> leerDomicilios();
+	List<IidCiudadDireccionDTO> leerDomiciliosPorDireccion(String domicilio);
 
 	Optional<Domicilio> leerDomicilioPorId(Long id);
 

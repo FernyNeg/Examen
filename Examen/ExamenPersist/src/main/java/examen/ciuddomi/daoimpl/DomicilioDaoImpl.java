@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import examen.ciuddomi.dao.DomicilioDao;
-import examen.ciuddomi.entity.Domicilio;
+import examen.ciuddomi.entity.domicilio.Domicilio;
+import examen.ciuddomi.entity.domicilio.dto.IidCiudadDireccionDTO;
 import examen.ciuddomi.repository.DomicilioRepository;
 
 @Service
@@ -38,9 +39,9 @@ public class DomicilioDaoImpl implements DomicilioDao {
 	}
 
 	@Override
-	public List<Domicilio> leerDomicilios() {
+	public List<IidCiudadDireccionDTO> leerDomiciliosPorDireccion(String direccion) {
 		log.info("Se inicia consulta de domicilios");
-		return repo.findAll();
+		return repo.findByDireccionContaining(direccion);
 	}
 
 	@Override

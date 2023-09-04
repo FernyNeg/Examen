@@ -6,5 +6,5 @@ export class Ciudadano {
   aPaterno: string;
   aMaterno: string;
   edad: string;
-  domiciliosList: Domicilio[] = [];
+  domicilios: Domicilio[] = [];
 }

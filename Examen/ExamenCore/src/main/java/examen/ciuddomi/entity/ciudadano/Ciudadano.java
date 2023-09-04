@@ -1,7 +1,8 @@
-package examen.ciuddomi.entity;
+package examen.ciuddomi.entity.ciudadano;
 
-import java.util.List;
+import java.util.Set;
 
+import examen.ciuddomi.entity.domicilio.Domicilio;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,20 +14,28 @@ public class Ciudadano {
 	@Column(name = "idCiudadano")
 	private Long id;
 
-	@Column(name = "nombre")
+	@Column(name = "nombre", nullable = false)
 	private String nombre;
 
-	@Column(name = "aPaterno")
+	@Column(name = "aPaterno", nullable = false)
 	private String aPaterno;
 
 	@Column(name = "aMaterno")
 	private String aMaterno;
 
-	@Column(name = "edad")
+	@Column(name = "edad", nullable = false)
 	private int edad;
 
-	@ManyToMany(targetEntity = Domicilio.class)
-	private List<Domicilio> domiciliosList;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Ciudadano_domicilio_table",
+		joinColumns = {
+			@JoinColumn(name = "idCiudadano_fk", referencedColumnName = "idCiudadano")
+		},
+		inverseJoinColumns = {
+			@JoinColumn(name = "idDomicilio_fk", referencedColumnName = "idDomicilio")
+		}
+	)
+	private Set<Domicilio> domicilios;
 
 	public Ciudadano() {
 	}
@@ -79,12 +88,12 @@ public class Ciudadano {
 		this.edad = edad;
 	}
 
-	public List<Domicilio> getDomiciliosList() {
-		return domiciliosList;
+	public Set<Domicilio> getDomicilios() {
+		return domicilios;
 	}
 
-	public void setDomiciliosList(List<Domicilio> domiciliosList) {
-		this.domiciliosList = domiciliosList;
+	public void setDomicilios(Set<Domicilio> domicilios) {
+		this.domicilios = domicilios;
 	}
 
 }

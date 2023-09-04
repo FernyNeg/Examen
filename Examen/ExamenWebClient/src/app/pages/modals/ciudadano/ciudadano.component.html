@@ -87,7 +87,8 @@
         </div>
       </div>
       <div class='no-bars table-responsive'>
-        <table class=' table'>
+        <table class=' table tablesorter'>
+          <caption>Lista de domicilios</caption>
           <thead class=' text-primary'>
             <tr>
               <th class=' text-center'>Direccion</th>
@@ -100,8 +101,8 @@
               <td class=' text-center'>{{d.direccion}}</td>
               <td class=' text-center'>{{d.codPostal}}</td>
               <td class=' text-center'>
-                <input type="checkbox" name="{{d.direccion}}" id="{{d.id}}" #checked='ngModel'
-                  [(ngModel)]='d.checked'>
+                <input type="checkbox" name="{{d.direccion}}" id="{{d.id}}" #activo='ngModel'
+                  [(ngModel)]='d.activo'>
               </td>
             </tr>
             <tr *ngIf='domicilios.length==0'>

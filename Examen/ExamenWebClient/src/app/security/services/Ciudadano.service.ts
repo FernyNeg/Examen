@@ -12,6 +12,6 @@ export class CiudadanosService {
   AgregarCiudadano(param: Ciudadano) { return this.conexion.post<Ciudadano>(UrlConstantes.agregarCiudadano, param); }
   EditarCiudadano(param: Ciudadano) { return this.conexion.post<Ciudadano>(UrlConstantes.editarCiudadano, param); }
   BorrarCiudadano(param: Ciudadano) { return this.conexion.post(UrlConstantes.borrarCiudadano, param); }
-  LeerCiudadanosList() { return this.conexion.post<Ciudadano[]>(UrlConstantes.leerCiudadanos, null); }
+  LeerCiudadanosList(param: ConsultaList<Ciudadano>) { return this.conexion.post<Ciudadano[]>(UrlConstantes.leerCiudadanos, param); }
   LeerCiudadanoPorId(param: number) { return this.conexion.post<Ciudadano>(UrlConstantes.leerCiudadanoPorId, param); }
 }

@@ -6,6 +6,7 @@ import { CiudadanoComponent } from '../modals/ciudadano/ciudadano.component';
 import { ModalType } from 'src/app/security/shared/models/Base/ModalType.model';
 import { AccionesModal } from 'src/app/security/shared/models/enums/AccionesModal.enum';
 import { AlertasService } from 'src/app/security/services/Alertas.service';
+import { ConsultaList } from 'src/app/security/shared/models/Base/ConsultaList.model';
 
 @Component({
   selector: 'app-ciudadanos',
@@ -15,7 +16,7 @@ import { AlertasService } from 'src/app/security/services/Alertas.service';
 export class CiudadanosComponent implements OnInit {
   //#region Inicios
 
-  ciudadanos: Ciudadano[] = [];
+  busqueda: ConsultaList<Ciudadano> = new ConsultaList<Ciudadano>();
 
   constructor(
     private service: CiudadanosService,
@@ -38,11 +39,14 @@ export class CiudadanosComponent implements OnInit {
   DeleteCiudadanoEvent(c: Ciudadano) {
     this.ConfirmaEliminacion(c);
   }
+  BuscarPorNombreEvent() {
+    this.ConsultaService();
+  }
   //#endregion
 
   //#region Metodos
   openDialog(c: Ciudadano, accion: AccionesModal) {
-    var env: ModalType<Ciudadano> = new ModalType<Ciudadano>();
+    let env: ModalType<Ciudadano> = new ModalType<Ciudadano>();
     env.param = c;
     env.accion = accion;
     let dialogRef = this.dialog.open(CiudadanoComponent, {
@@ -65,13 +69,13 @@ export class CiudadanosComponent implements OnInit {
 
   //#region Servicios
   ConsultaService() {
-    this.service.LeerCiudadanosList().subscribe(res => {
-      this.ciudadanos = res;
+    this.service.LeerCiudadanosList(this.busqueda).subscribe(res => {
+      this.busqueda.list = res;
     });
   }
   DeleteCiudadanoService(c: Ciudadano) {
     this.service.BorrarCiudadano(c).subscribe(() => {
-      this.alerta.success(null,"Se ha eliminado correctamente el registro");
+      this.alerta.success(null, "Se ha eliminado correctamente el registro");
       this.ConsultaService();
     });
   }

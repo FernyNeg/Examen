@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import examen.ciuddomi.dao.DomicilioDao;
-import examen.ciuddomi.entity.Domicilio;
+import examen.ciuddomi.entity.domicilio.Domicilio;
+import examen.ciuddomi.entity.domicilio.dto.IidCiudadDireccionDTO;
+import examen.ciuddomi.entity.models.ConsultaList;
 
 @Service
 public class DomicilioService {
@@ -33,9 +35,9 @@ public class DomicilioService {
 		dao.borrarDomicilio(dom);
 	}
 
-	public List<Domicilio> leerDomicilios() {
+	public List<IidCiudadDireccionDTO> leerDomiciliosPorDireccion(ConsultaList<Domicilio> busqueda) {
 		log.info("Se procesa consulta de domicilios");
-		return dao.leerDomicilios();
+		return dao.leerDomiciliosPorDireccion(busqueda.getParam() == null ? "" : busqueda.getParam());
 	}
 
 	public Optional<Domicilio> leerDomicilioPorId(Long id) {

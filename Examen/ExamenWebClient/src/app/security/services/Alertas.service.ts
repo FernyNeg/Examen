@@ -8,8 +8,11 @@ export class AlertasService {
   private toast = Swal.mixin({
     toast: true,
     position: 'top-end',
-    showConfirmButton: false,
-    timer: 8000
+    showConfirmButton: true,
+    timer: 8000,
+    customClass: {
+      confirmButton: 'btn btn-info'
+    }
   });
 
   private confirmacion = Swal.mixin({
@@ -57,10 +60,10 @@ export class AlertasService {
   }
 
   async confirmacionAlert(titulo: string, msg: string, confirmText: string, cancelaText: string, callback) {
-    const res = await this.confirmacion.fire({
+    await this.confirmacion.fire({
       title: titulo ? titulo : '¿Esta seguro de realizar esta accion?',
       text: msg ? msg : "¡No puede deshacer esta acción!",
-      confirmButtonText: confirmText ? confirmText : 'Eliminar',
+      confirmButtonText: confirmText ? confirmText : 'Confirmar',
       cancelButtonText: cancelaText ? cancelaText : 'Cancelar',
     }).then(env => {
       callback(env);
